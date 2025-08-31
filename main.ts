@@ -11,7 +11,7 @@ radio.onReceivedNumber(function (receivedNumber) {
             strip.showColor(neopixel.colors(NeoPixelColors.Orange))
             music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
         }
-    } else if (1 == modes_array.indexOf(mode)) {
+    } else if (1 == modes_array.indexOf(mode) && 42 == receivedNumber) {
         connection_watchdog_counter = 5
         delta = Math.map(Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength)), 55, 95, 25, 500)
         if (radio.receivedPacket(RadioPacketProperty.SignalStrength) < -90) {
