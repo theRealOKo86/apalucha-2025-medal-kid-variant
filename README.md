@@ -1,15 +1,6 @@
 
 > Open this page at [https://therealoko86.github.io/apalucha-2025-medal-kid-variant/](https://therealoko86.github.io/apalucha-2025-medal-kid-variant/)
 
-## Use as Extension
-
-This repository can be added as an **extension** in MakeCode.
-
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/therealoko86/apalucha-2025-medal-kid-variant** and import
-
 ## Edit this project
 
 To edit this repository in MakeCode.
