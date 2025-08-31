@@ -12,6 +12,7 @@ radio.onReceivedNumber(function (receivedNumber) {
             music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
         }
     } else if (1 == modes_array.indexOf(mode)) {
+        connection_watchdog_counter = 5
         delta = Math.map(Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength)), 55, 95, 25, 500)
         if (radio.receivedPacket(RadioPacketProperty.SignalStrength) < -90) {
             strip.showColor(neopixel.colors(NeoPixelColors.Blue))
@@ -23,7 +24,6 @@ radio.onReceivedNumber(function (receivedNumber) {
             strip.showColor(neopixel.colors(NeoPixelColors.Red))
         } else if (radio.receivedPacket(RadioPacketProperty.SignalStrength) < -60) {
             strip.showColor(neopixel.colors(NeoPixelColors.Red))
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
         }
     }
 })
@@ -88,6 +88,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     	
     }
 })
+let connection_watchdog_counter = 0
 let delta = 0
 let mode = ""
 let tones_array: number[] = []
@@ -117,6 +118,7 @@ modes_array = ["lightshow", "treasure_hunt"]
 tones_array = [262, 294]
 mode = modes_array[0]
 delta = 1000
+connection_watchdog_counter = 5
 basic.forever(function () {
     if (0 == modes_array.indexOf(mode)) {
         basic.showString("Apalucha 2025")
@@ -138,5 +140,11 @@ basic.forever(function () {
     } else if (1 == modes_array.indexOf(mode)) {
         music.play(music.tonePlayable(262, music.beat(BeatFraction.Sixteenth)), music.PlaybackMode.UntilDone)
         basic.pause(delta)
+        if (connection_watchdog_counter > 0) {
+            connection_watchdog_counter = connection_watchdog_counter - 1
+        } else if (connection_watchdog_counter == 0) {
+            strip.showColor(neopixel.colors(NeoPixelColors.Black))
+            delta = 1000
+        }
     }
 })
